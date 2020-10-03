@@ -173,6 +173,10 @@ class PiksiMulti:
         self.receiver_state_msg = self.init_receiver_state_msg()
         self.num_wifi_corrections = self.init_num_corrections_msg()
 
+        self.origin_service_server = rospy.Service("get_origin_llh",
+                                                   OriginLlhGet,
+                                                   self.origin_service_handler)
+
         # Corrections over wifi message, if we are not the base station.
         if not self.base_station_mode:
             # Start new thread to periodically ping base station.
@@ -192,6 +196,17 @@ class PiksiMulti:
 
         # Spin.
         rospy.spin()
+
+    def origin_service_handler(self, req):
+        res = OriginLlhGetResponse()
+        if self.origin_enu_set:
+            res.success = True
+            res.lat = math.degrees(self.latitude0)
+            res.lon = math.degrees(self.longitude0)
+            res.height = self.altitude0
+        else:
+            res.success = False
+        return res
 
     def create_topic_callbacks(self):
         # Callbacks from SBP messages (cb_sbp_*) implemented "manually".
@@ -1125,3 +1140,7 @@ class PiksiMulti:
         self.last_section_setting_read = []
         self.last_setting_read = []
         self.last_value_read = []
+
+
+if __name__ == '__main__':
+    piksi_multi = PiksiMulti()

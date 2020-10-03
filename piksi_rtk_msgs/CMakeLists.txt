@@ -55,6 +55,7 @@ add_message_files(
 ## Generate services in the 'srv' folder
 add_service_files(
   FILES
+    OriginLlhGet.srv
     SettingsWrite.srv
     SettingsReadReq.srv
     SettingsReadResp.srv

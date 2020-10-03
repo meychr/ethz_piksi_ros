@@ -1,0 +1,7 @@
+# Read origin used for local ENU frame.
+
+---
+bool success
+float64 lat         # Latitude [deg].
+float64 lon         # Longitude [deg].
+float64 height      # Height [m].
