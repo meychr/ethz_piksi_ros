@@ -173,7 +173,7 @@ class PiksiMulti:
         self.receiver_state_msg = self.init_receiver_state_msg()
         self.num_wifi_corrections = self.init_num_corrections_msg()
 
-        self.origin_service_server = rospy.Service("get_origin_llh",
+        self.origin_service_server = rospy.Service("~get_origin_llh",
                                                    OriginLlhGet,
                                                    self.origin_service_handler)
 
